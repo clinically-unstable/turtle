@@ -9,37 +9,38 @@ import math
 
 t = turtle.Turtle()
 turtle.bgcolor("#3d3f45")
-
-# AI did this formula for me cause my brain couldn't handle the math
-
-def draw_oval_from_origin(origin_x, origin_y, width, height, heading):
+# ai math equation to make an oval 
+def draw_oval(start_x, start_y, width, height, heading):
 
     angle = math.radians(heading)
-   
-    center_x = origin_x - (height/2) * math.sin(angle)
-    center_y = origin_y - (height/2) * math.cos(angle)
-    t.penup()
+    center_x = start_x - (0 * math.cos(angle) - (-height/2) * math.sin(angle))
+    center_y = start_y - (0 * math.sin(angle) + (-height/2) * math.cos(angle))
 
-    start_x = origin_x
-    start_y = origin_y
+    t.penup()
     t.goto(start_x, start_y)
     t.setheading(heading)
     t.pendown()
-    steps = 150
-    for i in range(steps + 1):
-        theta = 2 * math.pi * i / steps
+    steps = 20
    
+    theta_start = 3 * math.pi / 2
+    for i in range(steps + 1):
+        theta = theta_start + (2 * math.pi * i / steps)
         x = width * math.cos(theta)
         y = height * math.sin(theta)
-      
         rot_x = x * math.cos(angle) - y * math.sin(angle)
         rot_y = x * math.sin(angle) + y * math.cos(angle)
         t.goto(center_x + rot_x, center_y + rot_y)
     t.penup()
-    t.goto(origin_x, origin_y)
+    t.goto(start_x, start_y)
     t.pendown()
 
-origin_x, origin_y = 0, 0  
+oval_width = 80
+oval_height = 160
+
+center_x, center_y = 10, 10
+theta_bottom = 3 * math.pi / 2
+start_x = center_x + oval_width * math.cos(theta_bottom)
+start_y = center_y + oval_height * math.sin(theta_bottom)
 
 while True:
     if keyboard.is_pressed('w'):
@@ -64,7 +65,16 @@ while True:
         t.color("black")
     if keyboard.is_pressed('8'):
         t.speed(100)
-        for f in range(10):
+        for f in range(9):
             heading = t.heading()
-            draw_oval_from_origin(origin_x, origin_y, 40, 80, heading)
+            draw_oval(start_x, start_y, oval_width, oval_height, heading)
             t.left(10)
+    if keyboard.is_pressed('9'):
+        for m in range(100):
+            t.speed(100)
+            t.forward(200)
+            t.right(2**2)
+            t.left(150)
+            t.forward(100)
+       
+        
