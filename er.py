@@ -30,9 +30,11 @@ while True:
         t.color("purple")
     if keyboard.is_pressed('7'):
         t.color("black")
-
-    for f in range (1000): 
-        t.speed(100)
-        t.forward(f/20)
-        t.right(10)
-print("hello world")
+    if keyboard.is_pressed('8'):
+        for f in range (200): 
+            t.speed(100)
+            t.forward(200)
+            t.right(2**2)
+            t.left(150)
+            t.forward(100)
+            f = f + 1
