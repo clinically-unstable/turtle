@@ -9,6 +9,7 @@ import math
 
 t = turtle.Turtle()
 turtle.bgcolor("#3d3f45")
+t._tracer(0)
 # ai math equation to make an oval 
 def draw_oval(start_x, start_y, width, height, heading):
 
@@ -20,7 +21,7 @@ def draw_oval(start_x, start_y, width, height, heading):
     t.goto(start_x, start_y)
     t.setheading(heading)
     t.pendown()
-    steps = 20
+    steps = 25
    
     theta_start = 3 * math.pi / 2
     for i in range(steps + 1):
@@ -37,10 +38,12 @@ def draw_oval(start_x, start_y, width, height, heading):
 oval_width = 80
 oval_height = 160
 
-center_x, center_y = 10, 10
+start_x = t.xcor()
+start_y = t.ycor()
+
 theta_bottom = 3 * math.pi / 2
-start_x = center_x + oval_width * math.cos(theta_bottom)
-start_y = center_y + oval_height * math.sin(theta_bottom)
+center_x = start_x
+center_y = start_y
 
 while True:
     if keyboard.is_pressed('w'):
@@ -63,18 +66,27 @@ while True:
         t.color("purple")
     if keyboard.is_pressed('7'):
         t.color("black")
-    if keyboard.is_pressed('8'):
-        t.speed(100)
+    if keyboard.is_pressed('9'):
         for f in range(9):
             heading = t.heading()
-            draw_oval(start_x, start_y, oval_width, oval_height, heading)
+            t.speed(0)
+            draw_oval(center_x, center_y, oval_width, oval_height, heading)
             t.left(10)
-    if keyboard.is_pressed('9'):
-        for m in range(100):
-            t.speed(100)
+            t._tracer(1)
+    if keyboard.is_pressed('8'):
+        t.penup()
+        t.goto(center_x-50, center_y-160)
+        t.setheading(0)
+        t.pendown()
+        for m in range(180):
+            t.speed(0)
             t.forward(200)
             t.right(2**2)
-            t.left(150)
+            t.left(90)
             t.forward(100)
-       
-        
+        t.penup()
+        t.goto(center_x, center_y)
+        t.pendown()
+        t._tracer(2)
+    if keyboard.is_pressed('0'):
+        t.color("#3d3f45")
