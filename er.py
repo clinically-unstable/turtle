@@ -44,7 +44,7 @@ start_y = t.ycor()
 theta_bottom = 3 * math.pi / 2
 center_x = start_x
 center_y = start_y
-
+# keyboard controls
 while True:
     if keyboard.is_pressed('w'):
         t.forward(5)
@@ -66,6 +66,7 @@ while True:
         t.color("purple")
     if keyboard.is_pressed('7'):
         t.color("black")
+    # oval thing
     if keyboard.is_pressed('9'):
         for f in range(9):
             heading = t.heading()
@@ -73,6 +74,7 @@ while True:
             draw_oval(center_x, center_y, oval_width, oval_height, heading)
             t.left(10)
             t._tracer(1)
+    # circle thing
     if keyboard.is_pressed('8'):
         t.penup()
         t.goto(center_x-50, center_y-160)
@@ -90,3 +92,4 @@ while True:
         t._tracer(2)
     if keyboard.is_pressed('0'):
         t.color("#3d3f45")
+
